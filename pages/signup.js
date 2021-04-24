@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Router from "next/router";
 
-function signin() {
+function signup() {
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -10,10 +10,10 @@ function signin() {
 
   const [loading, setLoading] = useState(false);
 
-  const handleSignin = async (email, password) => {
+  const handleSignup = async (email, password) => {
     setLoading(true);
 
-    const response = await fetch("./api/signin", {
+    const response = await fetch("./api/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
@@ -36,7 +36,7 @@ function signin() {
     const password = userData.password;
 
     try {
-      await handleSignin(email, password);
+      await handleSignup(email, password);
     } catch (error) {
       console.error(error);
       setUserData({ ...userData, error: error.message });
@@ -48,7 +48,7 @@ function signin() {
     <div className="container">
       <div className="row justify-content-center mt-5">
         <div className="col-4 border p-4 rounded">
-          <h2 className="text-center">Welcome Back</h2>
+          <h2 className="text-center">Get Started</h2>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="email">Email</label>
@@ -90,7 +90,7 @@ function signin() {
               disabled={loading}
               className="btn btn-primary w-100 mt-3"
             >
-              {loading ? "Loading..." : "Signin"}
+              {loading ? "Loading..." : "Signup"}
             </button>
 
             {userData.error && (
@@ -105,4 +105,4 @@ function signin() {
   );
 }
 
-export default signin;
+export default signup;

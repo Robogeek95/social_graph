@@ -31,7 +31,7 @@ const Accounts = () => {
   const router = useRouter();
   const { data: accounts, error } = useSWR("./api/list-accounts", fetcher);
   useEffect(() => {
-    // if (error) router.push("/");
+    if (error) router.push("/");
   }, [error, router]);
   console.log(accounts);
   return (

@@ -3,7 +3,23 @@ import { useRouter } from "next/router";
 import useSWR, { mutate } from "swr";
 import { withAuthSync } from "../utils/auth";
 
+const fetcher = (url) =>
+  fetch(url).then((res) => {
+    if (res.status >= 300) {
+      throw new Error("API Client error");
+    }
+
+    return res.json();
+  });
+
 const Feed = () => {
+  const router = useRouter();
+  const { data: feed, error: feedErr } = useSWR("./api/list-feed", fetcher);
+  useEffect(() => {
+    if (feedErr) console.log(feedErr);
+  }, [feedErr, router]);
+  console.log(feed);
+
   const [postData, setPostData] = useState({
     description: "",
     error: "",
@@ -25,6 +41,7 @@ const Feed = () => {
     }
 
     setPosting(false);
+    setPostData({ ...postData, description: "" });
   };
 
   const handleSubmit = async (content) => {

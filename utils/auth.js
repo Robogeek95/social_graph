@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import Router from "next/router";
 
-export const login = ({ email }) => {
-  Router.push("/profile");
+export const signin = ({ email }) => {
+  Router.push("/feed");
 };
 
 export const logout = async () => {
@@ -10,7 +10,7 @@ export const logout = async () => {
 
   window.localStorage.setItem("logout", Date.now());
 
-  Router.push("/login");
+  Router.push("/signin");
 };
 
 export const withAuthSync = (Component) => {
@@ -18,7 +18,7 @@ export const withAuthSync = (Component) => {
     const syncLogout = (event) => {
       if (event.key === "logout") {
         console.log("logged out from storage!");
-        Router.push("/login");
+        Router.push("/signin");
       }
     };
 

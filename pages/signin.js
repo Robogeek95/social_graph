@@ -25,7 +25,7 @@ function signin() {
     }
 
     setLoading(false);
-    Router.push("/");
+    Router.push("/feed");
   };
 
   async function handleSubmit(event) {

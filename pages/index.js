@@ -1,65 +1,62 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import { useRouter } from "next/router";
+import { logout } from "../utils/auth";
 
-export default function Home() {
+const Home = () => {
+  const router = useRouter();
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div className="container">
+      <div>
+        <h1>Basic social graph example</h1>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <p>Steps to test the features:</p>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
+        <ol>
+          <li>
+            Click signup and create an account, this will also log you in.
+          </li>
+          <li>
+            Click home and click feed, notice how your session is being
+            used through a token stored in a cookie.s
+          </li>
+          <li>
+            Click logout and try to go to feed again. You'll get redirected
+            to the `/login` route.
+          </li>
+        </ol>
+        <div className="row mt-5">
+          <div
+            className="col-3 border p-4 rounded text-center"
+            onClick={() => router.push("/signup")}
           >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
+            SignUp
+          </div>
+          <div
+            className="col-3 border p-4 rounded text-center"
+            onClick={() => router.push("/signin")}
           >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+            Login
+          </div>
+          <div
+            className="col-3 border p-4 rounded text-center"
+            onClick={logout}
+          >
+            Logout
+          </div>
+          <div
+            className="col-3 border p-4 rounded text-center"
+            onClick={() => router.push("/feed")}
+          >
+            Feed
+          </div>
         </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+      </div>
+      <style jsx>{`
+        li {
+          margin-bottom: 0.5rem;
+        }
+      `}</style>
     </div>
-  )
-}
+  );
+};
+
+export default Home;

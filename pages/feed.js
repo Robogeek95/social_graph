@@ -16,7 +16,10 @@ const Feed = () => {
   const router = useRouter();
   const { data: feed, error: feedErr } = useSWR("./api/list-feed", fetcher);
   useEffect(() => {
-    if (feedErr) console.log(feedErr);
+    if (feedErr) {
+      router.push("/signin");
+      console.log(feedErr);
+    }
   }, [feedErr, router]);
   console.log(feed);
 

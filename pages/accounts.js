@@ -2,8 +2,6 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import useSWR, { mutate } from "swr";
 import { withAuthSync } from "../utils/auth";
-import list from "./api/list-accounts";
-console.log(list);
 
 const fetcher = (url) =>
   fetch(url).then((res) => {
